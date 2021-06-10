@@ -1,0 +1,25 @@
+{
+  "name": "menufy",
+  "version": "0.0.1",
+  "description": "Restaurant Menu Generator",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "husky": "^6.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenzoi/Menufy.git"
+  },
+  "author": "Kenzo Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kenzoi/Menufy/issues"
+  },
+  "homepage": "https://github.com/kenzoi/Menufy#readme"
+}
