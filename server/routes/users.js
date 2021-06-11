@@ -1,9 +1,8 @@
 'use strict';
 
+module.exports = async function (fastify) {
+  await fastify.register(require('../controllers/users'));
 
-module.exports = async function (fastify, opts) {
-  const {getUser, postUser, test} = require('../controllers/users');
-  fastify.get('/users', getUser);
-  fastify.post('/users', postUser);
-
+  fastify.get('/users', fastify.usersController.getUser);
+  fastify.post('/users', fastify.usersController.postUser);
 };

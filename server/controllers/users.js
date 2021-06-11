@@ -1,18 +1,17 @@
 'use strict';
 
-const User = require('../models/users');
+const fp = require('fastify-plugin');
 
-async function getUser (request, reply) {
-  return User.find({});
-}
+module.exports = fp(async function (fastify) {
+  const { Menu } = fastify.mongoose;
 
-async function postUser (request, reply) {
-  return User.create({name: request.body.name});
-}
+  async function getUser (request, reply) {
+    return await Menu.find({});
+  }
 
-async function test (fastify) {
-  console.log(fastify);
-  return 'works';
-}
+  async function postUser (request, reply) {
+    return await Menu.create({ name: request.body.name });
+  }
 
-module.exports = { getUser, postUser, test };
+  fastify.decorate('usersController', { getUser, postUser });
+});
