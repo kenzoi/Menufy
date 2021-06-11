@@ -1,14 +1,18 @@
 'use strict';
 
-const users = ['kenzo'];
+const User = require('../models/users');
 
 async function getUser (request, reply) {
-  return users;
+  return User.find({});
 }
 
 async function postUser (request, reply) {
-  users.push(request.body.name);
-  return 'user added';
+  return User.create({name: request.body.name});
 }
 
-module.exports = { getUser, postUser };
+async function test (fastify) {
+  console.log(fastify);
+  return 'works';
+}
+
+module.exports = { getUser, postUser, test };
