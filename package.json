@@ -9,7 +9,14 @@
     "@commitlint/config-conventional": "^12.1.4",
     "eslint": "^7.28.0",
     "eslint-plugin-json": "^3.0.0",
-    "husky": "^6.0.0"
+    "gulp": "^4.0.2",
+    "gulp-eslint": "^6.0.0",
+    "gulp-htmllint": "0.0.19",
+    "gulp-load-plugins": "^2.0.7",
+    "gulp-stylelint": "^13.0.0",
+    "husky": "^6.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,10 +30,5 @@
   "bugs": {
     "url": "https://github.com/kenzoi/Menufy/issues"
   },
-  "homepage": "https://github.com/kenzoi/Menufy#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test"
-    }
-  }
+  "homepage": "https://github.com/kenzoi/Menufy#readme"
 }
