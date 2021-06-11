@@ -19,7 +19,7 @@
 
 > 'npm test'
 
-### Enviroment Variables
+### Enviroment Variables (Optional)
 
 **Create a .env file inside the server folder**
 
