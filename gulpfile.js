@@ -6,6 +6,7 @@ const $ = require('gulp-load-plugins')();
 function addDefSrcIgnore (srcArr) {
   return srcArr.concat([
     '!node_modules{,/**}',
+    '!./server/node_modules{,/**}',
     '!private{,/**}',
     '!dist{,/**}',
     '!.git{,/**}',
