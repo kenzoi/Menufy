@@ -25,7 +25,11 @@
 
 Options:
 
-- Listen to requests from your LAN
+- Server port (default 3000):
+
+> PORT=3000
+
+- Listen to requests from your LAN:
 
 > FASTIFY_ADDRESS="Your IP Address"
 
