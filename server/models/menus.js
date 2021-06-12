@@ -29,19 +29,15 @@ module.exports = fp(async function (fastyfy) {
     groups: [groupSchema]
   });
 
-  const restaurantSchema = new Schema({
-    name: { type: String, required: true },
-    whatsapp: String,
-    phone: String,
-    website: String,
-    address: String,
-  });
-
   const menuSchema = new Schema({
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    restaurant: { type: restaurantSchema, required: true },
+    restaurantName: { type: String, required: true },
+    whatsapp: String,
+    phone: String,
+    website: String,
+    address: String,
     menu: [subMenuSchema]
   });
 

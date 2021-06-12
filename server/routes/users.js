@@ -2,8 +2,32 @@
 
 module.exports = async function (fastify) {
   await fastify.register(require('../controllers/users'));
-  const { getUser, postUser } = fastify.usersController;
+  const { registerUser } = fastify.usersController;
 
-  fastify.get('/users', getUser);
-  fastify.post('/users', postUser);
+  fastify.post('/users', {
+    handler: registerUser,
+    schema: {
+      body: {
+        type: 'object',
+        required: ['username', 'password', 'email', 'restaurantName'],
+        properties: {
+          username: { type: 'string' },
+          password: { type: 'string' },
+          email: { type: 'string' },
+          restaurantName: { type: 'string' }
+        }
+      },
+      response: {
+        '201': {
+          type: 'object',
+          properties: {
+            _id: { type: 'string' },
+            username: { type: 'string' },
+            email: { type: 'string' },
+            restaurantName: { type: 'string' }
+          }
+        }
+      }
+    }
+  });
 };
