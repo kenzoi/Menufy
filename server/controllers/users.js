@@ -10,7 +10,14 @@ module.exports = fp(async function (fastify) {
   }
 
   async function postUser (request, reply) {
-    return await Menu.create({ name: request.body.name });
+    try {
+      const { username, password, email, restaurantName } = request.body;
+      return await Menu.create({ username, password, email, restaurant: {name: restaurantName} });
+
+    } catch (err) {
+      console.error(err);
+      reply.internalServerError();
+    }
   }
 
   fastify.decorate('usersController', { getUser, postUser });
