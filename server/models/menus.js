@@ -43,5 +43,5 @@ module.exports = fp(async function (fastyfy) {
 
   const Menu = mongoose.model('Menu', menuSchema);
 
-  fastyfy.decorate('mongoose', { Menu });
+  fastyfy.decorate('mongoose', { Menu, instance: mongoose });
 });
