@@ -29,18 +29,22 @@ module.exports = fp(async function (fastyfy) {
     groups: [groupSchema]
   });
 
-  const menuSchema = new Schema({
-    username: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    restaurant: { type: String, required: true },
+  const restaurantSchema = new Schema({
+    name: { type: String, required: true },
     whatsapp: String,
     phone: String,
     website: String,
     address: String,
+  });
+
+  const menuSchema = new Schema({
+    username: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    restaurant: { type: restaurantSchema, required: true },
     menu: [subMenuSchema]
   });
-  
+
   const Menu = mongoose.model('Menu', menuSchema);
 
   fastyfy.decorate('mongoose', { Menu });
