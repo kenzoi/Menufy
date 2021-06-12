@@ -30,8 +30,8 @@ module.exports = fp(async function (fastify) {
       const { menuId } = request.params;
       const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
       if (!idIsValid) return httpErrors.badRequest('Not a valid id');
-      const deleted = await Menu.findByIdAndDelete(menuId);
-      if (!deleted) return httpErrors.notFound('Not found this id');
+      const isDeleted = await Menu.findByIdAndDelete(menuId);
+      if (!isDeleted) return httpErrors.notFound('Not found this id');
       reply.code(204);
     } catch (err) {
       console.error(err);
@@ -39,5 +39,23 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  fastify.decorate('menusController', { registerMenu, deleteMenu });
+  async function updateMenu (request, reply) {
+    try {
+      const { menuId } = request.params;
+      const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
+      if (!idIsValid) return httpErrors.badRequest('Not a valid id');
+      const updatedValues = {};
+      for (const prop in request.body) {
+        updatedValues[prop] = request.body[prop];
+      }
+      const isUpdated = await Menu.findByIdAndUpdate(menuId, updatedValues);
+      if (!isUpdated) return httpErrors.notFound('Not found this id'); // Because isUpdated will be the old object or null if not found.
+      reply.code(204);
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+
+  fastify.decorate('menusController', { registerMenu, deleteMenu, updateMenu });
 });

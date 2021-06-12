@@ -2,7 +2,7 @@
 
 module.exports = async function (fastify) {
   await fastify.register(require('../controllers/menus'));
-  const { registerMenu, deleteMenu } = fastify.menusController;
+  const { registerMenu, deleteMenu, updateMenu } = fastify.menusController;
 
   fastify.post('/menus', {
     handler: registerMenu,
@@ -10,6 +10,7 @@ module.exports = async function (fastify) {
       body: {
         type: 'object',
         required: ['username', 'password', 'email', 'restaurantName'],
+        additionalProperties: false,
         properties: {
           username: { type: 'string' },
           password: { type: 'string' },
@@ -42,6 +43,48 @@ module.exports = async function (fastify) {
         }
       },
       response: {
+        '4xx': {
+          error: { type: 'string' },
+          message: { type: 'string' },
+          statusCode: { type: 'number' }
+        }
+      }
+    }
+  });
+
+  fastify.put('/menus/:menuId', {
+    handler: updateMenu,
+    schema: {
+      body: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          username: { type: 'string' },
+          password: { type: 'string' },
+          email: { type: 'string' },
+          restaurantName: { type: 'string' }
+        }
+      },
+      params: {
+        type: 'object',
+        required: ['menuId'],
+        properties: {
+          menuId: { type: 'string', minLength: 1 }
+        }
+      },
+      response: {
+        response: {
+          '2xx': {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              username: { type: 'string' },
+              password: { type: 'string' },
+              email: { type: 'string' },
+              restaurantName: { type: 'string' }
+            }
+          }
+        },
         '4xx': {
           error: { type: 'string' },
           message: { type: 'string' },
