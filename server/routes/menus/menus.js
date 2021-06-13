@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = async function (fastify, opts) {
-  const { registerMenu } = fastify.controllers.menu;
-  
+  const { registerMenu } = fastify.menusControllers;
+
   fastify.post('/', {
     handler: registerMenu,
     schema: {

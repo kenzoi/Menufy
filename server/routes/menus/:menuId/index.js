@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async function (fastify, opts) {
-  const { deleteMenu, updateMenu } = fastify.controllers.menu;
+  const { deleteMenu, updateMenu } = fastify.menusControllers;
 
   fastify.delete('/', {
     handler: deleteMenu,

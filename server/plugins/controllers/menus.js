@@ -57,5 +57,5 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  fastify.decorate('controllers', { menu: { registerMenu, deleteMenu, updateMenu } });
+  fastify.decorate('menusControllers', { registerMenu, deleteMenu, updateMenu });
 });

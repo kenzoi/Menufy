@@ -8,7 +8,8 @@ module.exports = fp(async function (fastyfy) {
     await mongoose.connect('mongodb://localhost/users', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      useFindAndModify: false,
+      useCreateIndex: true
     });
     console.log('--- Connected to Mongo ---');
   } catch (err) {
@@ -34,8 +35,8 @@ module.exports = fp(async function (fastyfy) {
   });
 
   const menuSchema = new Schema({
-    username: { type: String, required: true },
-    email: { type: String, required: true },
+    username: { type: String, required: true, unique: true }, // Mongoose unique is not suitable for production - https://mongoosejs.com/docs/faq.html
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     restaurantName: { type: String, required: true },
     whatsapp: String,
@@ -45,7 +46,13 @@ module.exports = fp(async function (fastyfy) {
     menu: [subMenuSchema]
   });
 
+  // Drop Database
+  // await mongoose.connection.dropDatabase();
+
   const Menu = mongoose.model('Menu', menuSchema);
+
+  // syncIndexes to unique start working
+  // await Menu.syncIndexes();
 
   fastyfy.decorate('mongoose', { Menu, instance: mongoose });
 });

@@ -1,9 +1,10 @@
 'use strict';
 
 module.exports = async function (fastify, opts) {
+  const { authenticateUser } = fastify.authControllers;
 
   fastify.post('/auth', {
-    handler: () => 'works',
+    handler: authenticateUser,
     schema: {
       body: {
         type: 'object',
@@ -21,7 +22,6 @@ module.exports = async function (fastify, opts) {
           properties: {
             token: { type: 'string' },
             _id: { type: 'string' },
-            menu: { type: 'array' }
           }
         }
       }
