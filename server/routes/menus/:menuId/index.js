@@ -1,38 +1,9 @@
 'use strict';
 
-module.exports = async function (fastify) {
-  await fastify.register(require('../controllers/menus'));
-  const { registerMenu, deleteMenu, updateMenu } = fastify.menusController;
+module.exports = async function (fastify, opts) {
+  const { deleteMenu, updateMenu } = fastify.controllers.menu;
 
-  fastify.post('/menus', {
-    handler: registerMenu,
-    schema: {
-      body: {
-        type: 'object',
-        required: ['username', 'password', 'email', 'restaurantName'],
-        additionalProperties: false,
-        properties: {
-          username: { type: 'string' },
-          password: { type: 'string' },
-          email: { type: 'string' },
-          restaurantName: { type: 'string' }
-        }
-      },
-      response: {
-        '201': {
-          type: 'object',
-          properties: {
-            _id: { type: 'string' },
-            username: { type: 'string' },
-            email: { type: 'string' },
-            restaurantName: { type: 'string' }
-          }
-        }
-      }
-    }
-  });
-
-  fastify.delete('/menus/:menuId', {
+  fastify.delete('/', {
     handler: deleteMenu,
     schema: {
       params: {
@@ -52,7 +23,8 @@ module.exports = async function (fastify) {
     }
   });
 
-  fastify.put('/menus/:menuId', {
+  // TODO: Create a separated endpoint to deal with login information.
+  fastify.put('/', {
     handler: updateMenu,
     schema: {
       body: {

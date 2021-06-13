@@ -45,7 +45,7 @@ module.exports = fp(async function (fastify) {
       const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
       if (!idIsValid) return httpErrors.badRequest('Not a valid id');
       const updatedValues = {};
-      for (const prop in request.body) {
+      for (const prop in request.body) { //TODO if the client pass an object but with no expected value we're return 204.
         updatedValues[prop] = request.body[prop];
       }
       const isUpdated = await Menu.findByIdAndUpdate(menuId, updatedValues);
@@ -57,5 +57,5 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  fastify.decorate('menusController', { registerMenu, deleteMenu, updateMenu });
+  fastify.decorate('controllers', { menu: { registerMenu, deleteMenu, updateMenu } });
 });

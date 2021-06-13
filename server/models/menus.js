@@ -5,7 +5,11 @@ const fp = require('fastify-plugin');
 
 module.exports = fp(async function (fastyfy) {
   try {
-    await mongoose.connect('mongodb://localhost/users', { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect('mongodb://localhost/users', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false
+    });
     console.log('--- Connected to Mongo ---');
   } catch (err) {
     console.error(err);
