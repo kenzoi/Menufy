@@ -1,7 +1,33 @@
 'use strict';
 
 module.exports = async function (fastify, opts) {
-  const { deleteMenu, updateMenu } = fastify.menusControllers;
+  const { getMenu, deleteMenu, updateMenu } = fastify.menusControllers;
+
+  fastify.get('/', {
+    handler: getMenu,
+    schema: {
+      params: {
+        type: 'object',
+        required: ['menuId'],
+        properties: {
+          menuId: { type: 'string', minLength: 1 }
+        }
+      },
+      response: {
+        '200': {
+          type: 'object',
+          properties: {
+            menu: { type: 'array' }
+          }
+        },
+        '4xx': {
+          error: { type: 'string' },
+          message: { type: 'string' },
+          statusCode: { type: 'number' }
+        }
+      }
+    }
+  });
 
   fastify.delete('/', {
     handler: deleteMenu,
@@ -45,23 +71,21 @@ module.exports = async function (fastify, opts) {
         }
       },
       response: {
-        response: {
-          '2xx': {
-            type: 'object',
-            properties: {
-              _id: { type: 'string' },
-              username: { type: 'string' },
-              password: { type: 'string' },
-              email: { type: 'string' },
-              restaurantName: { type: 'string' }
-            }
+        '2xx': {
+          type: 'object',
+          properties: {
+            _id: { type: 'string' },
+            username: { type: 'string' },
+            password: { type: 'string' },
+            email: { type: 'string' },
+            restaurantName: { type: 'string' }
           }
-        },
-        '4xx': {
-          error: { type: 'string' },
-          message: { type: 'string' },
-          statusCode: { type: 'number' }
         }
+      },
+      '4xx': {
+        error: { type: 'string' },
+        message: { type: 'string' },
+        statusCode: { type: 'number' }
       }
     }
   });

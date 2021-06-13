@@ -3,7 +3,6 @@
 const fp = require('fastify-plugin');
 
 module.exports = fp(async function (fastify) {
-  const mongoose = fastify.mongoose.instance;
   const { Menu } = fastify.mongoose;
   const { httpErrors } = fastify;
 
