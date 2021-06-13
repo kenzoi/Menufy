@@ -145,6 +145,48 @@ module.exports = fp(async function (fastify) {
     }
   }
 
+  async function createItem (request, reply) {
+    try {
+      const { menuId } = request.params;
+      const { name, description, value, subMenuId, groupId } = request.body;
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid menu id');
+      if (!isIdValid(subMenuId)) return httpErrors.badRequest('Not a valid submenu id');
+      if (!isIdValid(groupId)) return httpErrors.badRequest('Not a valid group id');
+      const menuFound = await Menu.findById(menuId).exec();
+      if (!menuFound) return httpErrors.notFound('Menu not found this id');
+      const subMenu = menuFound.menu.find((el) => String(el._id) === subMenuId);
+      const group = subMenu.groups.find((el) => String(el._id) === groupId);
+      const itemsLength = group.items.push({ name, description, value });
+      await menuFound.save();
+      reply.code(201);
+      return group.items[itemsLength - 1];
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+
+  async function deleteItem (request) {
+    try {
+      const { menuId } = request.params;
+      const { subMenuId, groupId, _id } = request.body;
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid menu id');
+      if (!isIdValid(subMenuId)) return httpErrors.badRequest('Not a valid submenu id');
+      if (!isIdValid(groupId)) return httpErrors.badRequest('Not a valid group id');
+      if (!isIdValid(_id)) return httpErrors.badRequest('Not a valid item id');
+      const menuFound = await Menu.findById(menuId).exec();
+      if (!menuFound) return httpErrors.notFound('Menu not found this id');
+      const subMenu = menuFound.menu.find((el) => String(el._id) === subMenuId);
+      const group = subMenu.groups.find((el) => String(el._id) === groupId);
+      const newItems = group.items.pull(_id);
+      await menuFound.save();
+      return newItems;
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+
   fastify.decorate('menusControllers', {
     registerMenu,
     getMenu,
@@ -153,7 +195,9 @@ module.exports = fp(async function (fastify) {
     createSubMenu,
     deleteSubMenu,
     createGroup,
-    deleteGroup
+    deleteGroup,
+    createItem,
+    deleteItem
   });
 
 
