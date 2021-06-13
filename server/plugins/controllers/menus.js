@@ -28,8 +28,7 @@ module.exports = fp(async function (fastify) {
   async function getMenu (request) {
     try {
       const { menuId } = request.params;
-      const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
-      if (!idIsValid) return httpErrors.badRequest('Not a valid id');
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Not found this id');
       return { menu: menuFound.menu };
@@ -42,8 +41,7 @@ module.exports = fp(async function (fastify) {
   async function deleteMenu (request, reply) {
     try {
       const { menuId } = request.params;
-      const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
-      if (!idIsValid) return httpErrors.badRequest('Not a valid id');
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const isDeleted = await Menu.findByIdAndDelete(menuId).exec();
       if (!isDeleted) return httpErrors.notFound('Not found this id');
       reply.code(204);
@@ -56,8 +54,7 @@ module.exports = fp(async function (fastify) {
   async function updateMenu (request, reply) {
     try {
       const { menuId } = request.params;
-      const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
-      if (!idIsValid) return httpErrors.badRequest('Not a valid id');
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const updatedValues = {};
       for (const prop in request.body) { //TODO if the client pass an object but with no expected value we're return 204.
         updatedValues[prop] = request.body[prop];
@@ -75,8 +72,7 @@ module.exports = fp(async function (fastify) {
     try {
       const { menuId } = request.params;
       const { name } = request.body;
-      const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
-      if (!idIsValid) return httpErrors.badRequest('Not a valid id');
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Not found this id'); // Because isUpdated will be the old object or null if not found.
       const newSubMenu = new SubMenuSchema({ name });
@@ -93,10 +89,8 @@ module.exports = fp(async function (fastify) {
     try {
       const { menuId } = request.params;
       const { _id } = request.body;
-      const menuIdIsValid = mongoose.Types.ObjectId.isValid(menuId);
-      if (!menuIdIsValid) return httpErrors.badRequest('Not a valid menu id');
-      const subMenuIdIsValid = mongoose.Types.ObjectId.isValid(_id);
-      if (!subMenuIdIsValid) return httpErrors.badRequest('Not a valid submenu id');
+      if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid menu id');
+      if (!isIdValid(_id)) return httpErrors.badRequest('Not a valid submenu id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Menu not found this id');
       const newSubmenu = menuFound.menu.pull(_id); // If there is no element still return the array from DB without warning.
