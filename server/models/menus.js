@@ -50,9 +50,9 @@ module.exports = fp(async function (fastyfy) {
   // await mongoose.connection.dropDatabase();
 
   const Menu = mongoose.model('Menu', menuSchema);
-
+  const SubMenuSchema = mongoose.model('SubMenu', subMenuSchema);
   // syncIndexes to unique start working
   // await Menu.syncIndexes();
 
-  fastyfy.decorate('mongoose', { Menu, instance: mongoose });
+  fastyfy.decorate('mongoose', { instance: mongoose, Menu, SubMenuSchema });
 });

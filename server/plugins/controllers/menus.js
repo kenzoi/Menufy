@@ -4,7 +4,7 @@ const fp = require('fastify-plugin');
 
 module.exports = fp(async function (fastify) {
   const mongoose = fastify.mongoose.instance;
-  const { Menu } = fastify.mongoose;
+  const { Menu, SubMenuSchema } = fastify.mongoose;
   const { httpErrors } = fastify;
 
   async function registerMenu (request, reply) {
@@ -79,7 +79,8 @@ module.exports = fp(async function (fastify) {
       if (!idIsValid) return httpErrors.badRequest('Not a valid id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Not found this id'); // Because isUpdated will be the old object or null if not found.
-      const menuLength = menuFound.menu.push({ name });
+      const newSubMenu = new SubMenuSchema({ name });
+      const menuLength = menuFound.menu.push(newSubMenu);
       await menuFound.save();
       return menuFound.menu[menuLength - 1];
     } catch (err) {
@@ -88,5 +89,23 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  fastify.decorate('menusControllers', { registerMenu, getMenu, deleteMenu, updateMenu, createSubMenu });
+  async function deleteSubMenu (request, reply) {
+    try {
+      const { menuId } = request.params;
+      const { _id } = request.body;
+      const menuIdIsValid = mongoose.Types.ObjectId.isValid(menuId);
+      if (!menuIdIsValid) return httpErrors.badRequest('Not a valid menu id');
+      const subMenuIdIsValid = mongoose.Types.ObjectId.isValid(_id);
+      if (!subMenuIdIsValid) return httpErrors.badRequest('Not a valid submenu id');
+      const menuFound = await Menu.findById(menuId).exec();
+      if (!menuFound) return httpErrors.notFound('Menu not found this id');
+      const newSubmenu = menuFound.menu.pull(_id); // If there is no element still return the array from DB without warning. 
+      await menuFound.save();
+      return newSubmenu;
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+  fastify.decorate('menusControllers', { registerMenu, getMenu, deleteMenu, updateMenu, createSubMenu, deleteSubMenu });
 });
