@@ -71,7 +71,7 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  async function createSubMenu (request, reply) {
+  async function createSubMenu (request) {
     try {
       const { menuId } = request.params;
       const { name } = request.body;
@@ -89,7 +89,7 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  async function deleteSubMenu (request, reply) {
+  async function deleteSubMenu (request) {
     try {
       const { menuId } = request.params;
       const { _id } = request.body;
@@ -99,7 +99,7 @@ module.exports = fp(async function (fastify) {
       if (!subMenuIdIsValid) return httpErrors.badRequest('Not a valid submenu id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Menu not found this id');
-      const newSubmenu = menuFound.menu.pull(_id); // If there is no element still return the array from DB without warning. 
+      const newSubmenu = menuFound.menu.pull(_id); // If there is no element still return the array from DB without warning.
       await menuFound.save();
       return newSubmenu;
     } catch (err) {
@@ -107,5 +107,63 @@ module.exports = fp(async function (fastify) {
       throw httpErrors.internalServerError();
     }
   }
-  fastify.decorate('menusControllers', { registerMenu, getMenu, deleteMenu, updateMenu, createSubMenu, deleteSubMenu });
+
+  async function createGroup (request) {
+    try {
+      const { menuId } = request.params;
+      const { subMenuId, name } = request.body;
+      const menuIdIsValid = mongoose.Types.ObjectId.isValid(menuId);
+      if (!menuIdIsValid) return httpErrors.badRequest('Not a valid menu id');
+      const subMenuIdIsValid = mongoose.Types.ObjectId.isValid(subMenuId);
+      if (!subMenuIdIsValid) return httpErrors.badRequest('Not a valid submenu id');
+      const menuFound = await Menu.findById(menuId).exec();
+      if (!menuFound) return httpErrors.notFound('Menu not found this id');
+
+      console.log(menuFound.menu.find((el) => String(el._id) === subMenuId));
+      const subMenu = menuFound.menu.find((el) => String(el._id) === subMenuId);
+      const subMenuLength = subMenu.groups.push({ name });
+      await menuFound.save();
+      return subMenu.groups[subMenuLength - 1];
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+
+  async function deleteGroup (request) {
+    try {
+      const { menuId } = request.params;
+      const { _id } = request.body;
+      const menuIdIsValid = mongoose.Types.ObjectId.isValid(menuId);
+      if (!menuIdIsValid) return httpErrors.badRequest('Not a valid menu id');
+      const subMenuIdIsValid = mongoose.Types.ObjectId.isValid(_id);
+      if (!subMenuIdIsValid) return httpErrors.badRequest('Not a valid submenu id');
+      const menuFound = await Menu.findById(menuId).exec();
+      if (!menuFound) return httpErrors.notFound('Menu not found this id');
+      const newSubmenu = menuFound.menu.pull(_id); // If there is no element still return the array from DB without warning.
+      await menuFound.save();
+      return newSubmenu;
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+
+  fastify.decorate('menusControllers', {
+    registerMenu,
+    getMenu,
+    deleteMenu,
+    updateMenu,
+    createSubMenu,
+    deleteSubMenu,
+    createGroup,
+    deleteGroup
+  });
+
+
+  // Helper function
+
+  function checkId (id) {
+    return mongoose.Types.ObjectId.isValid(id);
+  }
 });
