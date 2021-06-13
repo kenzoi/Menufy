@@ -71,5 +71,22 @@ module.exports = fp(async function (fastify) {
     }
   }
 
-  fastify.decorate('menusControllers', { registerMenu, getMenu, deleteMenu, updateMenu });
+  async function createSubMenu (request, reply) {
+    try {
+      const { menuId } = request.params;
+      const { name } = request.body;
+      const idIsValid = mongoose.Types.ObjectId.isValid(menuId);
+      if (!idIsValid) return httpErrors.badRequest('Not a valid id');
+      const menuFound = await Menu.findById(menuId).exec();
+      if (!menuFound) return httpErrors.notFound('Not found this id'); // Because isUpdated will be the old object or null if not found.
+      const menuLength = menuFound.menu.push({ name });
+      await menuFound.save();
+      return menuFound.menu[menuLength - 1];
+    } catch (err) {
+      console.error(err);
+      throw httpErrors.internalServerError();
+    }
+  }
+
+  fastify.decorate('menusControllers', { registerMenu, getMenu, deleteMenu, updateMenu, createSubMenu });
 });
