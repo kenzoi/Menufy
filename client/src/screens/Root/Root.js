@@ -4,8 +4,8 @@ import ScreensHomepage from '../Homepage/Homepage.jsx';
 import ScreensException from '../Exception/Exception.jsx';
 import ScreensLogin from '../Login/Login.jsx';
 import ScreensSignup from '../Signup/Signup.jsx';
+import ScreensDashboard from '../Dashboard/Dashboard.jsx';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
 
 
 function ScreensRoot () {
@@ -17,6 +17,7 @@ function ScreensRoot () {
           <Route path="/" exact component={ScreensHomepage} />
           <Route path="/Signup" component={ScreensSignup} />
           <Route path="/login" component={ScreensLogin} />
+          <Route path="/dashboard/:menuId" component={ScreensDashboard}/>
           <Route component={ScreensException} />
         </Switch>
       </div>

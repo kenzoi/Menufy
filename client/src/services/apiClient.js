@@ -15,6 +15,10 @@ const apiClient = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(username ? {username, password} : {email, password})
     });
+  },
+
+  getMenu: async function (menuId) {
+    return await fetch(`${baseUrl}/${menuId}`);
   }
 };
 
