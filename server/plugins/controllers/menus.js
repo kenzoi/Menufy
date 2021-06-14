@@ -4,7 +4,7 @@ const fp = require('fastify-plugin');
 
 module.exports = fp(async function (fastify) {
   const mongoose = fastify.mongoose.instance;
-  const { Menu, SubMenuSchema } = fastify.mongoose;
+  const { Menu, SubMenu } = fastify.mongoose;
   const { httpErrors } = fastify;
 
   async function registerMenu (request, reply) {
@@ -75,7 +75,7 @@ module.exports = fp(async function (fastify) {
       if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Not found this id'); // Because isUpdated will be the old object or null if not found.
-      const newSubMenu = new SubMenuSchema({ name });
+      const newSubMenu = new SubMenu({ name });
       const menuLength = menuFound.menu.push(newSubMenu);
       await menuFound.save();
       return menuFound.menu[menuLength - 1];

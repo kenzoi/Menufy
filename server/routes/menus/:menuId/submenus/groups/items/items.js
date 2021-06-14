@@ -9,6 +9,7 @@ module.exports = async function (fastify, opts) {
       body: {
         type: 'object',
         required: ['name', 'value', 'subMenuId', 'groupId'],
+        additionalProperties: false,
         properties: {
           name: { type: 'string' },
           description: { type: 'string' },
@@ -44,6 +45,7 @@ module.exports = async function (fastify, opts) {
       body: {
         type: 'object',
         required: ['_id', 'subMenuId', 'groupId'],
+        additionalProperties: false,
         properties: {
           _id: { type: 'string' },
           subMenuId: { type: 'string' },
