@@ -10,10 +10,8 @@ module.exports = fp(async function (fastify) {
     try {
       const { username, email, password } = request.body;
       let menuFound;
-      if (email) {
-        menuFound = await Menu.findOne({email}).exec();
-      } else if (username) {
-        menuFound = await Menu.findOne({username}).exec();
+      if (email || username) {
+        menuFound = await Menu.findOne(email ? {email} : {username}).exec();
       } else {
         return httpErrors.badRequest();
       }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import apiClient from '../../../services/apiClient';
 
 function UsersSignupForm () {
   const [username, setUsername] = useState('');
@@ -6,12 +7,16 @@ function UsersSignupForm () {
   const [restaurantName, setRestaurantName] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit (event) {
+  async function handleSubmit (event) {
     event.preventDefault();
-    const onSubmitUsername = event.target[0].value;
-    const onSubmitEmail = event.target[1].value;
-    const onSubmitRestaurantName = event.target[2].value;
-    const onSubmitPassword = event.target[3].value;
+    const onSubmitValues = {
+      username: event.target[0].value,
+      email: event.target[1].value,
+      restaurantName: event.target[2].value,
+      password: event.target[3].value
+    }
+    const response = await apiClient.createUser(onSubmitValues);
+    console.log(response);
   }
 
   return (

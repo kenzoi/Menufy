@@ -5,6 +5,7 @@ const AutoLoad = require('fastify-autoload');
 
 module.exports = async function (fastify, opts) {
   fastify.register(require('./models/menus'));
+  fastify.register(require('fastify-cors'));
 
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
