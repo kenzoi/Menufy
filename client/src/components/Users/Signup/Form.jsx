@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import apiClient from '../../../services/apiClient';
 
 function UsersSignupForm () {
@@ -6,6 +7,7 @@ function UsersSignupForm () {
   const [email, setEmail] = useState('');
   const [restaurantName, setRestaurantName] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   async function handleSubmit (event) {
     event.preventDefault();
@@ -16,7 +18,10 @@ function UsersSignupForm () {
       password: event.target[3].value
     }
     const response = await apiClient.createUser(onSubmitValues);
-    console.log(response);
+    if (response.ok) {
+      const data = await response.json();
+      history.push(`/menus/${data._id}`)
+    }
   }
 
   return (
