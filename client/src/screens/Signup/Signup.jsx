@@ -1,6 +1,6 @@
 import './Signup.css';
 
-function Signup () {
+function ScreensSignup () {
   return (
     <main>
       Signup works!
@@ -8,4 +8,4 @@ function Signup () {
   );
 }
 
-export default Signup;
+export default ScreensSignup;

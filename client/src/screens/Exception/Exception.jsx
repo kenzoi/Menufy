@@ -1,6 +1,6 @@
 import './Exception.css';
 
-function Exception () {
+function ScreensException () {
   return (
     <main>
       <h1>404: Page not found</h1>
@@ -8,4 +8,4 @@ function Exception () {
   );
 }
 
-export default Exception;
+export default ScreensException;

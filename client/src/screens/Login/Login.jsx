@@ -1,6 +1,6 @@
 import './Login.css';
 
-function Login () {
+function ScreensLogin () {
   return (
     <main>
       Login works!
@@ -8,4 +8,4 @@ function Login () {
   );
 }
 
-export default Login;
+export default ScreensLogin;
