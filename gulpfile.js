@@ -11,7 +11,8 @@ function addDefSrcIgnore (srcArr) {
     '!dist{,/**}',
     '!.git{,/**}',
     '!.husky{,/**}',
-    '!**/.DS_Store'
+    '!**/.DS_Store',
+    '!client{,/**}'
   ]);
 }
 
