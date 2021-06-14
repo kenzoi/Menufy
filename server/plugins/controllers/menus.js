@@ -9,8 +9,10 @@ module.exports = fp(async function (fastify) {
 
   async function registerMenu (request, reply) {
     try {
-      const { username, password, email, restaurantName } = request.body;
-      const menu = await Menu.create({ username, password, email, restaurantName });
+      for (const prop in request.body) { // TODO - make a helper function
+        if (request.body[prop].length === 0) return httpErrors.badRequest();
+      }
+      const menu = await Menu.create(request.body); // TODO - when a user or email already exists Mongo throws an error.
       const response = {
         _id: menu._id,
         username: menu.username,

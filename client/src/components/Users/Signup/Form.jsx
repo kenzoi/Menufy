@@ -20,7 +20,7 @@ function UsersSignupForm () {
     const response = await apiClient.createUser(onSubmitValues);
     if (response.ok) {
       const data = await response.json();
-      history.push(`/menus/${data._id}`)
+      history.push(`/dashboard/${data._id}`)
     }
   }
 
