@@ -13,3 +13,25 @@
 .AddForm--active {
   display: block;
 }
+
+.AddButton__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.AddButton__button {
+ background-color: #fec5bb;
+}
+
+.AddButton__panel__options {
+  text-align: center;
+  margin-top: 0;
+}
+
+.AddButton__panel__options > li {
+  text-align: center;
+  margin-top: 0;
+  padding: 10px;
+  background-color: #fcd5ce;
+}

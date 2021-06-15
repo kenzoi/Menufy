@@ -11,10 +11,10 @@ function AddButton () {
   const [itemFormActive, setItemFormActive] = useState(false);
 
   return (
-    <>
-      <button onClick={() => setActive((p) => !p)}>Add</button>
+    <div className="AddButton__container">
+      <button className="AddButton__button" onClick={() => setActive((p) => !p)}>Add</button>
       <nav className={`AddButton__panel--${active ? 'active' : 'inactive'}`}>
-        <ul>
+        <ul className="AddButton__panel__options">
           <li onClick={() => setMenuFormActive((p) => !p)}>Add Menu</li>
           {menuFormActive ? < MenuForm /> : null}
           <li onClick={() => setGroupFormActive((p) => !p)}>Add Group</li>
@@ -23,7 +23,7 @@ function AddButton () {
           {itemFormActive ? <ItemForm /> : null}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }
 
