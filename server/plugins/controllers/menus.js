@@ -74,6 +74,7 @@ module.exports = fp(async function (fastify) {
     try {
       const { menuId } = request.params;
       const { name } = request.body;
+      if (name.length === 0) return httpErrors.badRequest('Not a valid name');
       if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Not found this id'); // Because isUpdated will be the old object or null if not found.

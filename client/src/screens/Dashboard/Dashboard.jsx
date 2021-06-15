@@ -4,12 +4,14 @@ import apiClient from '../../services/apiClient';
 import { UserContext } from '../Root/Root';
 import Menus from '../../components/Menus/Menus.jsx';
 import Groups from '../../components/Groups/Groups.jsx';
+import AddButton from '../../components/AddButton/AddButton.jsx';
 
 export const MenuContext = createContext();
 
 function ScreensDashboard () {
   const { menuId } = useParams();
   const [menu, setMenu] = useState([]);
+  const [activeMenu, setActiveMenu] = useState('');
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -26,9 +28,11 @@ function ScreensDashboard () {
 
   return (
     <main>
-      <MenuContext.Provider value={{ menu, setMenu, groups, setGroups }}>
+      <MenuContext.Provider value={{ menu, setMenu, groups, setGroups, setActiveMenu }}>
         <Menus />
+        <h2>{activeMenu}</h2>
         <Groups />
+        <AddButton />
       </MenuContext.Provider>
     </main>
   );

@@ -19,7 +19,15 @@ const apiClient = {
 
   getMenu: async function (menuId) {
     return await fetch(`${baseUrl}/${menuId}`);
-  }
+  },
+
+  createSubMenu: async function (menuId, name) {
+    return await fetch(`${baseUrl}/${menuId}/submenus`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name })
+    });
+  },
 };
 
 export default apiClient;

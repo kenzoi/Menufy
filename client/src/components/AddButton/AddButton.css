@@ -1,0 +1,15 @@
+.AddButton__panel--inactive {
+  display: none;
+}
+
+.AddButton__panel--active {
+  display: block;
+}
+
+.AddForm--inactive {
+  display: none;
+}
+
+.AddForm--active {
+  display: block;
+}

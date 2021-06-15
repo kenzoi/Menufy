@@ -3,9 +3,16 @@ import { useState, useContext } from 'react';
 import { MenuContext } from '../../screens/Dashboard/Dashboard.jsx';
 
 function Menus () {
-  const { menu, setGroups } = useContext(MenuContext);
+  const { menu, setGroups, setActiveMenu } = useContext(MenuContext);
   const [active, setActive] = useState(false);
-  const menuList = menu.map(subMenu => <li key={subMenu._id} onClick={() => setGroups(subMenu.groups)} >{subMenu.name}</li>);
+  const menuList = menu.map(subMenu => (
+    <li key={subMenu._id} onClick={() => handleOnclick(subMenu)} >{subMenu.name}</li>));
+
+  function handleOnclick (subMenu) {
+    setGroups(subMenu.groups);
+    setActive(false);
+    setActiveMenu(subMenu.name);
+  }
 
   return (
     <>
