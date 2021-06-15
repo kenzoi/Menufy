@@ -22,6 +22,8 @@ module.exports = async function (fastify, opts) {
           properties: {
             token: { type: 'string' },
             _id: { type: 'string' },
+            username: { type: 'string' },
+            email: { type: 'string' }
           }
         }
       }
