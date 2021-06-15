@@ -1,0 +1,7 @@
+.ItemForm__select-group--inactive {
+  display: none;
+}
+
+.ItemForm__select-group--active {
+  display: block;
+}

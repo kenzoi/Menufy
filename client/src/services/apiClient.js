@@ -35,6 +35,14 @@ const apiClient = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ subMenuId, name })
     });
+  },
+
+  createItem: async function (menuId, subMenuId, groupId, name, description, value) {
+    return await fetch(`${baseUrl}/${menuId}/submenus/groups/items`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subMenuId, groupId, name, description, value })
+    });
   }
 };
 

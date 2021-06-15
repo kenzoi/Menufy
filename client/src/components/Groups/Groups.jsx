@@ -6,16 +6,16 @@ import Items from './Items/Items.jsx';
 function Groups () {
   const { groups } = useContext(MenuContext);
   const groupsList = groups.map(group => (
-    <>
+    <div key={group._id}>
     <li>{group.name}</li>
       <Items items={group.items}/>
-    </>
+    </div>
   ));
 
   return (
-    <ul>
+    <>
       {groupsList}
-    </ul>
+    </>
   );
 }
 

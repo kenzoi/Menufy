@@ -22,7 +22,7 @@ function MenuForm () {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name"></label>
+        <label htmlFor="name">Name:</label>
         <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required />
         <input type="submit" value="Add" />
       </form>
