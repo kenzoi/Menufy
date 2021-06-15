@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { UserContext } from '../Root/Root';
 import Menus from '../../components/Menus/Menus.jsx';
+import Groups from '../../components/Groups/Groups.jsx';
 
 export const MenuContext = createContext();
 
 function ScreensDashboard () {
   const { menuId } = useParams();
   const [menu, setMenu] = useState([]);
+  const [groups, setGroups] = useState([]);
 
   useEffect(() => {
     async function getMenu () {
@@ -24,8 +26,9 @@ function ScreensDashboard () {
 
   return (
     <main>
-      <MenuContext.Provider value={{ menu, setMenu }}>
-      <Menus />
+      <MenuContext.Provider value={{ menu, setMenu, groups, setGroups }}>
+        <Menus />
+        <Groups />
       </MenuContext.Provider>
     </main>
   );
