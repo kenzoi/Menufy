@@ -13,7 +13,7 @@ module.exports = async function (fastify, opts) {
         properties: {
           name: { type: 'string' },
           description: { type: 'string' },
-          value: {type: 'number'},
+          value: {type: 'string'},
           subMenuId: { type: 'string' },
           groupId: { type: 'string' }
         }
@@ -32,7 +32,7 @@ module.exports = async function (fastify, opts) {
             _id: { type: 'string' },
             name: { type: 'string' },
             description: { type: 'string' },
-            value: {type: 'number'}
+            value: {type: 'string'}
           }
         }
       }

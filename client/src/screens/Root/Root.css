@@ -5,7 +5,7 @@ ul, li {
   list-style-type: none;
 }
 
-button {
+button, input {
   border: none;
   padding: 10px 20px;
   text-align: center;

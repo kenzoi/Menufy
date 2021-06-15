@@ -7,15 +7,15 @@ function Groups () {
   const { groups } = useContext(MenuContext);
   const groupsList = groups.map(group => (
     <div key={group._id}>
-    <li>{group.name}</li>
+    <h3 className="Groups__title">{group.name}</h3>
       <Items items={group.items}/>
     </div>
   ));
 
   return (
-    <>
+    <div>
       {groupsList}
-    </>
+    </div>
   );
 }
 

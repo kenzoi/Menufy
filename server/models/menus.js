@@ -21,7 +21,7 @@ module.exports = fp(async function (fastyfy) {
   const itemSchema = new Schema({
     name: { type: String, required: true },
     description: String,
-    value: { type: Number, required: true }
+    value: { type: String, required: true }
   });
 
   const groupSchema = new Schema({

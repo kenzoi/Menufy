@@ -1,3 +1,4 @@
+import './Form.css';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiClient from '../../../services/apiClient';
@@ -25,14 +26,14 @@ function UsersSignupForm () {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
+      <form className="UsersSignupForm__form" onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input id="username" type="text" title="Your name" />
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Email</label>
         <input id="email" type="email" />
-        <label htmlFor="restaurant-name">Restaurant Name:</label>
+        <label htmlFor="restaurant-name">Restaurant Name</label>
         <input id="restaurant-name" type="text" />
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Password</label>
         <input id="password" type="password" />
         <input type="submit" />
       </form>

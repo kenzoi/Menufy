@@ -3,7 +3,7 @@ import UsersSignupForm from '../../components/Users/Signup/Form';
 
 function ScreensSignup () {
   return (
-    <main>
+    <main className="ScreensSignup__main">
       <UsersSignupForm />
     </main>
   );

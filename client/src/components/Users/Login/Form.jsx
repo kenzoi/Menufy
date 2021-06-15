@@ -1,3 +1,4 @@
+import './Form.css';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiClient from '../../../services/apiClient';
@@ -26,10 +27,10 @@ function UsersLoginForm () {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email-or-username">Email or username:</label>
+      <form className="UsersLoginForm__form" onSubmit={handleSubmit}>
+        <label htmlFor="email-or-username">Email or username</label>
         <input id="email-or-username" type="text" title="Your name" />
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Password</label>
         <input id="password" type="password"/>
         <input type="submit" />
       </form>

@@ -39,6 +39,7 @@ function ScreensRoot () {
             <Route path="/Signup" component={ScreensSignup} />
             <Route path="/login" component={ScreensLogin} />
             <Route path="/dashboard/:menuId" component={ScreensDashboard} />
+            <Route path="/menu/:menuId" component={ScreensDashboard} />
             <Route component={ScreensException} />
           </Switch>
         </UserContext.Provider>

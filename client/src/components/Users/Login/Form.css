@@ -1,0 +1,19 @@
+.UsersLoginForm__form {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  max-width: 750px;
+  background-color: #fae1dd;
+  width: 100%;
+}
+
+.UsersLoginForm__form > input {
+  margin: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+.UsersLoginForm__form > label {
+margin-left: 30px;
+}

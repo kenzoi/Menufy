@@ -34,9 +34,11 @@ function ScreensDashboard () {
       </div>
       <MenuContext.Provider value={{ menu, setMenu, groups, setGroups, activeMenu, setActiveMenu }}>
         <Menus />
-        <h2>{activeMenu.name ? activeMenu.name : null}</h2>
+        <div className="Dashboard__selected-submenu">
+          <h2>{activeMenu.name ? activeMenu.name : null}</h2>
+        </div>
         <Groups />
-        <AddButton />
+        {user.logged ? <AddButton /> : null}
       </MenuContext.Provider>
     </main>
   );
