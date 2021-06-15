@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiClient from '../../../services/apiClient';
+import { UserContext } from '../../../screens/Root/Root';
 
 function UsersSignupForm () {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [restaurantName, setRestaurantName] = useState('');
-  const [password, setPassword] = useState('');
   const history = useHistory();
+  const { logIn } = useContext(UserContext);
 
   async function handleSubmit (event) {
     event.preventDefault();
@@ -20,6 +18,7 @@ function UsersSignupForm () {
     const response = await apiClient.createUser(onSubmitValues);
     if (response.ok) {
       const data = await response.json();
+      logIn(data);
       history.push(`/dashboard/${data._id}`)
     }
   }
@@ -28,13 +27,13 @@ function UsersSignupForm () {
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
-        <input id="username" type="text" title="Your name" value={username} onChange={e => setUsername(e.target.value)}/>
+        <input id="username" type="text" title="Your name" />
         <label htmlFor="email">Email:</label>
-        <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)}/>
+        <input id="email" type="email" />
         <label htmlFor="restaurant-name">Restaurant Name:</label>
-        <input id="restaurant-name" type="text" value={restaurantName} onChange={e => setRestaurantName(e.target.value)}/>
+        <input id="restaurant-name" type="text" />
         <label htmlFor="password">Password:</label>
-        <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+        <input id="password" type="password" />
         <input type="submit" />
       </form>
     </>

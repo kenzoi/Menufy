@@ -23,7 +23,8 @@ module.exports = async function (fastify, opts) {
             token: { type: 'string' },
             _id: { type: 'string' },
             username: { type: 'string' },
-            email: { type: 'string' }
+            email: { type: 'string' },
+            restaurantName: { type: 'string' }
           }
         }
       }

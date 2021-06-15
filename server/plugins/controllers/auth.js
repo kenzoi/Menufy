@@ -17,7 +17,12 @@ module.exports = fp(async function (fastify) {
       }
       if (!menuFound) return httpErrors.forbidden();
       if (menuFound.password !== password) return httpErrors.forbidden();
-      const response = { token: 1, _id: menuFound._id, username: menuFound.username, email: menuFound.email };
+      const response = {
+        token: 1, _id: menuFound._id,
+        username: menuFound.username,
+        email: menuFound.email,
+        restaurantName: menuFound.restaurantName,
+      };
       return response;
     } catch (err) {
       console.error(err);
