@@ -24,9 +24,9 @@ function Header () {
     }
   }
 
-  return (<header className="App-header">
+  return (<header className="Header">
     <nav>
-      <ul>
+      <ul className="Header__menu-list">
         {userOptions()}
       </ul>
     </nav>

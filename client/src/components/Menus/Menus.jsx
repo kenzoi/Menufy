@@ -6,7 +6,7 @@ function Menus () {
   const { menu, setGroups, setActiveMenu } = useContext(MenuContext);
   const [active, setActive] = useState(false);
   const menuList = menu.map(subMenu => (
-    <li key={subMenu._id} onClick={() => handleOnclick(subMenu)} >{subMenu.name}</li>));
+    <li className="Menus__menu-items" key={subMenu._id} onClick={() => handleOnclick(subMenu)} >{subMenu.name}</li>));
 
   function handleOnclick (subMenu) {
     setGroups(subMenu.groups);
@@ -16,9 +16,9 @@ function Menus () {
 
   return (
     <>
-      <button onClick={() => setActive((p) => !p)}>Select Menu</button>
+      <button className="Menus__button" onClick={() => setActive((p) => !p)}>Select Menu</button>
       <nav className={`Menus__menu-panel--${active ? 'active' : 'inactive'}`}>
-        <ul>
+        <ul className="Menus__menu-list">
           {menuList}
         </ul>
       </nav>

@@ -26,12 +26,12 @@ function ItemForm () {
             subMenu.groups.map(group => {
               if (group._id === selectGroup._id) {
                 group.items.push(newItem);
-                return group;
               }
+              return group;
             });
             setGroups(subMenu.groups);
-            return subMenu;
           }
+          return subMenu;
         });
       })
 

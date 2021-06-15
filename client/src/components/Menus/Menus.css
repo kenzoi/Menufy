@@ -5,3 +5,19 @@
 .Menus__menu-panel--active {
   display: block;
 }
+
+.Menus__button {
+    background-color: #d8e2dc;
+    width: 100%;
+}
+
+.Menus__menu-items {
+  background-color: #ece4db;
+  width: 100%;
+  padding: 10px;
+}
+
+.Menus__menu-list {
+  margin-top: 0;
+  text-align: center;
+}

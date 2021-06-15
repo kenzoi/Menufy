@@ -1,5 +1,5 @@
 import './Groups.css';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { MenuContext } from '../../screens/Dashboard/Dashboard.jsx';
 import Items from './Items/Items.jsx';
 

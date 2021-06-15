@@ -1,0 +1,14 @@
+.Header {
+  background-color: #fec89a;
+  min-height: 30px;
+}
+
+.Header__menu-list {
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Header__menu-list > li {
+  margin: 5px;
+}
