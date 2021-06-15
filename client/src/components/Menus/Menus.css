@@ -1,0 +1,7 @@
+.Menus__menu-panel--inactive {
+  display: none;
+}
+
+.Menus__menu-panel--active {
+  display: block;
+}
