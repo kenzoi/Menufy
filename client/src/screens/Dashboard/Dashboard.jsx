@@ -15,12 +15,14 @@ function ScreensDashboard () {
   const [menu, setMenu] = useState([]);
   const [activeMenu, setActiveMenu] = useState({});
   const [groups, setGroups] = useState([]);
+  const [restaurantName, setRestaurantName] = useState('');
 
   useEffect(() => {
     async function getMenu () {
       const response = await apiClient.getMenu(menuId);
       if (response.ok) {
-        const { menu } = await response.json();
+        const { menu, restaurantName } = await response.json();
+        setRestaurantName(restaurantName);
         setMenu(menu);
       }
     }
@@ -30,7 +32,7 @@ function ScreensDashboard () {
   return (
     <main>
       <div className="Dashboard__restaurant-name">
-        <h1>{user.restaurantName ? user.restaurantName : null}</h1>
+        <h1>{restaurantName ? restaurantName : null}</h1>
       </div>
       <MenuContext.Provider value={{ menu, setMenu, groups, setGroups, activeMenu, setActiveMenu }}>
         <Menus />

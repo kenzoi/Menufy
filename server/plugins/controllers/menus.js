@@ -33,7 +33,7 @@ module.exports = fp(async function (fastify) {
       if (!isIdValid(menuId)) return httpErrors.badRequest('Not a valid id');
       const menuFound = await Menu.findById(menuId).exec();
       if (!menuFound) return httpErrors.notFound('Not found this id');
-      return { menu: menuFound.menu };
+      return { menu: menuFound.menu, restaurantName: menuFound.restaurantName };
     } catch (err) {
       console.error(err);
       throw httpErrors.internalServerError();

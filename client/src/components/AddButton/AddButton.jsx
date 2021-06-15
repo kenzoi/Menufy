@@ -15,12 +15,13 @@ function AddButton () {
       <button className="AddButton__button" onClick={() => setActive((p) => !p)}>Add</button>
       <nav className={`AddButton__panel--${active ? 'active' : 'inactive'}`}>
         <ul className="AddButton__panel__options">
-          <li onClick={() => setMenuFormActive((p) => !p)}>Add Menu</li>
+          <li className="AddButton__panel__options__buttons" onClick={() => setMenuFormActive((p) => !p)}>Add Menu</li>
           {menuFormActive ? < MenuForm /> : null}
-          <li onClick={() => setGroupFormActive((p) => !p)}>Add Group</li>
+          <li className="AddButton__panel__options__buttons" onClick={() => setGroupFormActive((p) => !p)}>Add Group</li>
           {groupFormActive ? <GroupForm /> : null}
-          <li onClick={() => setItemFormActive((p) => !p)}>Add Item</li>
+          <li className="AddButton__panel__options__buttons" onClick={() => setItemFormActive((p) => !p)}>Add Item</li>
           {itemFormActive ? <ItemForm /> : null}
+          <li className="AddButton__panel__options__buttons AddButton__delete">Delete Menu</li>
         </ul>
       </nav>
     </div>

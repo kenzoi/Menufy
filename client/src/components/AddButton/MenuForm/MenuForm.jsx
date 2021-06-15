@@ -20,13 +20,15 @@ function MenuForm () {
   }
 
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required />
-        <input type="submit" value="Add" />
+        <div className="MenuForm__container">
+          <label htmlFor="name">Name:</label>
+          <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required />
+          <input className="color" type="submit" value="Add" />
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

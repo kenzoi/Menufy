@@ -1,0 +1,11 @@
+.MenuForm__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100px;
+  width: 90%;
+  margin-top: 15px;
+}
+.color {
+  background-color: #d8e2dc;
+}

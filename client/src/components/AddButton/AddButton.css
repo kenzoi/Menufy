@@ -29,9 +29,14 @@
   margin-top: 0;
 }
 
-.AddButton__panel__options > li {
+
+.AddButton__panel__options__buttons {
   text-align: center;
   margin-top: 0;
   padding: 10px;
   background-color: #fcd5ce;
+}
+
+.AddButton__delete {
+  background-color: #e63946;
 }
