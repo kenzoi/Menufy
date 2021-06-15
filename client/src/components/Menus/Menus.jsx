@@ -11,7 +11,7 @@ function Menus () {
   function handleOnclick (subMenu) {
     setGroups(subMenu.groups);
     setActive(false);
-    setActiveMenu(subMenu.name);
+    setActiveMenu(subMenu);
   }
 
   return (

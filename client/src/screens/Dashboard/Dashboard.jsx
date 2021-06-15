@@ -11,7 +11,7 @@ export const MenuContext = createContext();
 function ScreensDashboard () {
   const { menuId } = useParams();
   const [menu, setMenu] = useState([]);
-  const [activeMenu, setActiveMenu] = useState('');
+  const [activeMenu, setActiveMenu] = useState({});
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,6 @@ function ScreensDashboard () {
       const response = await apiClient.getMenu(menuId);
       if (response.ok) {
         const { menu } = await response.json();
-        console.log(menu);
         setMenu(menu);
       }
     }
@@ -28,9 +27,9 @@ function ScreensDashboard () {
 
   return (
     <main>
-      <MenuContext.Provider value={{ menu, setMenu, groups, setGroups, setActiveMenu }}>
+      <MenuContext.Provider value={{ menu, setMenu, groups, setGroups, activeMenu, setActiveMenu }}>
         <Menus />
-        <h2>{activeMenu}</h2>
+        <h2>{activeMenu.name ? activeMenu.name : null}</h2>
         <Groups />
         <AddButton />
       </MenuContext.Provider>
