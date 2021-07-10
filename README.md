@@ -1,40 +1,49 @@
-# Menufy
+# Project Menufy
 
+Project Menufy is a SPA aimed at helping restaurants have their digital menus without costs due to the COVID pandemic.
+The app is entirely designed for smartphones.
 
-# Installation
+## Getting started
 
+This repo contains both client and server.
+You need git, node, npm and docker/docker-compose to run the app.
+Optionally you can skip docker and install Mongo directly on your PC.
 
-**Create a .env file inside the server folder**
+## Installation
 
+1. Clone this repo and enter
 
-- Please set port to 3001 (expected port by the client):
+    ```bash
+    git clone https://github.com/kenzoi/Menufy.git
+    cd Menufy
+    ```
 
-> PORT=3001
+2. Install dependencies
 
-(default port is 3000)
+    ```bash
+    npm i
+    cd client
+    npm i
+    cd ../server
+    npm i
+    ```
 
-Extra options (not required):
+3. While in the server folder run ```docker-compose up``` to start MongoDB.
 
-- Listen to requests from your LAN:
+4. Run ```npm start``` to start the server.
 
-> FASTIFY_ADDRESS="Your IP Address"
+5. While in the client folder run ```npm start``` to start the client.
 
-or
+6. (Optional) Server enviroment variables
 
-> FASTIFY_ADDRESS="0.0.0.0" // Listen on all IPv4 address!
+    ```bash
+    PORT=3001 # (default port is 3000)
+    FASTIFY_ADDRESS="0.0.0.0" # Listen on all IPv4 address, enable access from your local network.
+    ```
 
-### Start server
+## Tech Stack
 
-**Run 'npm install' inside server folder to install the server dependencies**
-
-- Start the application with pino-colada pretty logging (not suitable for production)
-
-> 'npm run dev'
-
-- Start the application
-
-> 'npm start'
-
-- Execute the unit tests
-
-> 'npm test'
+* [React](https://reactjs.org/)
+* [Fastify](https://www.fastify.io/)
+* [Mongo](https://www.mongodb.com/)
+* [Mongoose](https://mongoosejs.com/)
