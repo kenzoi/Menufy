@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async function (fastify, opts) {
+module.exports = async function (fastify) {
   const { getMenu, deleteMenu, updateMenu } = fastify.menusControllers;
 
   fastify.get('/', {
@@ -50,7 +50,6 @@ module.exports = async function (fastify, opts) {
     }
   });
 
-  // TODO: Create a separated endpoint to deal with login information.
   fastify.put('/', {
     handler: updateMenu,
     schema: {

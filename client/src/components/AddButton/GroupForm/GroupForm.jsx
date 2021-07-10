@@ -12,7 +12,6 @@ function GroupForm () {
 
   async function handleSubmit (event) {
     event.preventDefault();
-    console.log(name);
     const response = await apiClient.createGroup(user._id, activeMenu._id, name); // need to pass current submenuId
     if (response.ok) {
       const newGroup = await response.json();

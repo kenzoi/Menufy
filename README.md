@@ -1,9 +1,8 @@
 # Menufy
 
 
-## Server
+# Installation
 
-### Enviroment Variables
 
 **Create a .env file inside the server folder**
 

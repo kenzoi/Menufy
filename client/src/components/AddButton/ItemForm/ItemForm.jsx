@@ -18,7 +18,6 @@ function ItemForm () {
     const response = await apiClient.createItem(user._id, activeMenu._id, selectGroup._id, name, description, value);
     if (response.ok) {
       const newItem = await response.json();
-      console.log(newItem);
       setMenu(menu => {
         const newMenu = _.cloneDeep(menu);
          return newMenu.map(subMenu => {

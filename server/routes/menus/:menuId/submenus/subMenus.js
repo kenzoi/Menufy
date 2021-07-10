@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async function (fastify, opts) {
+module.exports = async function (fastify) {
   const { createSubMenu, deleteSubMenu } = fastify.menusControllers;
 
   fastify.post('/', {
